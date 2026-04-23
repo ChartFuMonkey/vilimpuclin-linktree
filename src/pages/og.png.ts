@@ -23,10 +23,15 @@ async function loadFont(family: string, weight: number): Promise<ArrayBuffer> {
 }
 
 async function loadLogoDataUri(): Promise<string | null> {
-  const p = path.join(process.cwd(), "public", "assets", "s1-logo.png");
+  const pngPath = path.join(process.cwd(), "public", "assets", "s1-logo.png");
   try {
-    const buf = await fs.readFile(p);
+    const buf = await fs.readFile(pngPath);
     return `data:image/png;base64,${buf.toString("base64")}`;
+  } catch {}
+  const svgPath = path.join(process.cwd(), "public", "assets", "logo-bg.svg");
+  try {
+    const buf = await fs.readFile(svgPath);
+    return `data:image/svg+xml;base64,${buf.toString("base64")}`;
   } catch {
     return null;
   }
