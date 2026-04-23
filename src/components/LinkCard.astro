@@ -1,0 +1,39 @@
+---
+interface Props {
+  label: string;
+  url: string;
+  thumbnail: string;
+  badge?: string;
+}
+const { label, url, thumbnail, badge } = Astro.props;
+---
+
+<div class="flex flex-col items-center">
+  <div class="mb-3 font-display font-bold uppercase tracking-[0.08em] text-white text-sm sm:text-base text-center leading-tight px-2">
+    {label}
+  </div>
+  <a
+    href={url}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="group block w-full rounded-2xl border border-white/10 bg-black/70 backdrop-blur-sm overflow-hidden shadow-[0_10px_40px_-12px_rgba(245,184,0,0.25)] transition-all duration-200 hover:-translate-y-0.5 hover:border-gold/60 hover:shadow-[0_16px_50px_-10px_rgba(245,184,0,0.55)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+  >
+    <div class="relative aspect-[16/9] w-full bg-neutral-900">
+      <img
+        src={thumbnail}
+        alt={label}
+        loading="lazy"
+        class="absolute inset-0 h-full w-full object-cover"
+        onerror="this.style.display='none'"
+      />
+      {badge && (
+        <span class="absolute top-3 left-3 rounded-full bg-gold px-2.5 py-1 text-[10px] font-bold uppercase tracking-widest text-black">
+          {badge}
+        </span>
+      )}
+      <span class="absolute bottom-3 right-3 rounded-full bg-gold/95 px-3 py-1.5 text-[11px] font-bold uppercase tracking-widest text-black group-hover:bg-gold">
+        Otvori →
+      </span>
+    </div>
+  </a>
+</div>

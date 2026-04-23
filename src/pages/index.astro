@@ -1,0 +1,46 @@
+---
+import { getCollection, getEntry } from "astro:content";
+import Base from "../layouts/Base.astro";
+import BackgroundLogo from "../components/BackgroundLogo.astro";
+import Hero from "../components/Hero.astro";
+import LinkCard from "../components/LinkCard.astro";
+import InstagramFooter from "../components/InstagramFooter.astro";
+
+const siteEntry = await getEntry("settings", "site");
+const site = siteEntry!.data;
+
+const linkEntries = await getCollection("links");
+const links = linkEntries
+  .map((e) => e.data)
+  .sort((a, b) => a.order - b.order);
+---
+
+<Base
+  title={`${site.hero_title} — ${site.hero_subtitle}`}
+  description={site.og_description}
+  ogTitle={site.og_title}
+  ogDescription={site.og_description}
+>
+  <BackgroundLogo title={site.hero_title} subtitle={site.hero_subtitle} />
+
+  <main class="relative z-10 mx-auto flex min-h-[100svh] w-full max-w-[480px] flex-col px-5">
+    <Hero
+      title={site.hero_title}
+      subtitle={site.hero_subtitle}
+      tagline={site.hero_tagline}
+    />
+
+    <section class="mt-4 flex flex-col gap-8">
+      {links.map((link) => (
+        <LinkCard
+          label={link.label}
+          url={link.url}
+          thumbnail={link.thumbnail}
+          badge={link.badge}
+        />
+      ))}
+    </section>
+
+    <InstagramFooter handle={site.instagram_handle} url={site.instagram_url} />
+  </main>
+</Base>

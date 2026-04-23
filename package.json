@@ -1,0 +1,22 @@
+{
+  "name": "vilimpuclin-linktree",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/tailwind": "^5.1.4",
+    "@fontsource/inter": "^5.2.8",
+    "@fontsource/oswald": "^5.2.8",
+    "@resvg/resvg-js": "^2.6.2",
+    "astro": "^5.1.1",
+    "satori": "^0.12.1",
+    "tailwindcss": "^3.4.17"
+  }
+}

@@ -1,0 +1,54 @@
+backend:
+  name: git-gateway
+  branch: main
+  commit_messages:
+    create: "cms: create {{collection}} \u201C{{slug}}\u201D"
+    update: "cms: update {{collection}} \u201C{{slug}}\u201D"
+    delete: "cms: delete {{collection}} \u201C{{slug}}\u201D"
+    uploadMedia: "cms: upload {{path}}"
+    deleteMedia: "cms: delete {{path}}"
+
+# Use editorial workflow so saves go via PR drafts (optional but safer)
+publish_mode: simple
+
+media_folder: "public/assets/uploads"
+public_folder: "/assets/uploads"
+
+site_url: https://vilimpuclin.netlify.app
+display_url: https://vilimpuclin.netlify.app
+logo_url: /assets/s1-logo.png
+
+collections:
+  - name: "settings"
+    label: "Site settings"
+    delete: false
+    editor: { preview: false }
+    files:
+      - name: "site"
+        label: "Hero & SEO"
+        file: "src/content/settings/site.json"
+        format: "json"
+        fields:
+          - { name: "hero_title", label: "Hero title (big text)", widget: "string" }
+          - { name: "hero_subtitle", label: "Hero subtitle (gold)", widget: "string" }
+          - { name: "hero_tagline", label: "Tagline (small, under subtitle)", widget: "text", required: false }
+          - { name: "instagram_handle", label: "Instagram handle (with @)", widget: "string" }
+          - { name: "instagram_url", label: "Instagram URL", widget: "string", required: false }
+          - { name: "og_title", label: "Share title (Open Graph)", widget: "string" }
+          - { name: "og_description", label: "Share description (Open Graph)", widget: "text" }
+
+  - name: "links"
+    label: "Link cards"
+    label_singular: "Link card"
+    folder: "src/content/links"
+    format: "json"
+    create: true
+    slug: "{{order}}-{{slug}}"
+    identifier_field: label
+    sortable_fields: ["order"]
+    fields:
+      - { name: "order", label: "Order (lower = higher on page)", widget: "number", value_type: "int", min: 1 }
+      - { name: "label", label: "Card label (shown ABOVE the card)", widget: "string" }
+      - { name: "url", label: "Destination URL", widget: "string", pattern: ["^https?://", "Must start with http:// or https://"] }
+      - { name: "thumbnail", label: "Card preview image", widget: "image" }
+      - { name: "badge", label: "Corner badge (optional, e.g. FREE, COACHING)", widget: "string", required: false }

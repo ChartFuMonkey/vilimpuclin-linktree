@@ -1,0 +1,38 @@
+---
+interface Props {
+  title: string;
+  subtitle: string;
+}
+const { title, subtitle } = Astro.props;
+---
+
+<div class="pointer-events-none fixed inset-0 -z-10 overflow-hidden bg-black">
+  <div
+    class="absolute inset-x-0 top-1/2 -translate-y-[58%] flex items-center justify-center"
+    aria-hidden="true"
+  >
+    <img
+      src="/assets/s1-logo.png"
+      alt=""
+      onerror="this.style.display='none'"
+      class="w-[min(90vw,720px)] max-h-[75vh] object-contain opacity-[0.13] select-none"
+      draggable="false"
+    />
+  </div>
+
+  <div
+    class="absolute inset-x-0 bottom-[6%] flex flex-col items-center px-4 text-center"
+    aria-hidden="true"
+  >
+    <div
+      class="font-display font-bold uppercase tracking-[0.02em] leading-[0.9] text-gold/[0.18]"
+      style="font-size: clamp(2rem, 9vw, 7.5rem);"
+    >
+      {title} {subtitle}
+    </div>
+  </div>
+
+  <div
+    class="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/60"
+  ></div>
+</div>
